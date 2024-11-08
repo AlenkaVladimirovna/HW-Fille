@@ -43,7 +43,7 @@ public class Main {
         if (icons.mkdir())
             builder.append("Каталог icons создан. ");
 
-        File myFileMain = new File("main//Main.java");
+        File myFileMain = new File(main, "Main.java");
         try {
             if (myFileMain.createNewFile())
                 builder.append("Файл Main.java создан. ");
@@ -51,7 +51,7 @@ public class Main {
             System.out.println(ex.getMessage());
         }
 
-        File myFileUtils = new File("main//Utils.java");
+        File myFileUtils = new File(main,"Utils.java");
         try {
             if (myFileUtils.createNewFile())
                 builder.append("Файл Utils.java создан. ");
@@ -59,11 +59,17 @@ public class Main {
             System.out.println(ex.getMessage());
         }
 
-        File myFileTemp = new File("temp//temp.txt");
+        File myFileTemp = new File(temp,"temp.txt");
         try {
             if (myFileTemp.createNewFile())
                 builder.append("Файл tmp.txt создан. ");
 
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        File notesFile = new File(dirl, "notes.txt");
+        try (FileWriter writer = new FileWriter(notesFile, false)) {
+            writer.write(builder.toString());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
